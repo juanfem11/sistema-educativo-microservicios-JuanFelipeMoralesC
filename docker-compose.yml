@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: secret
+    volumes:
+      - mongodb_data:/data/db
+
+  usuarios-servicio:
+    build: ./usuarios-servicio/usuarios-servicio
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - asignaturas-servicio
+      - mongodb  
+
+  asignaturas-servicio:
+    build: ./asignaturas-servicio/asignaturas-servicio
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - mongodb  
+
+  matriculas-servicio:
+    build: ./matriculas-servicio/matriculas-servicio
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - usuarios-servicio
+      - asignaturas-servicio
+      - mongodb  
+
+volumes:
+  mongodb_data:
