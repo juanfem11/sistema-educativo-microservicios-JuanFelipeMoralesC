@@ -36,7 +36,7 @@ public class MatriculaService {
         Matricula matricula = new Matricula();
         matricula.setEstudianteId(estudianteId);
         matricula.setAsignaturaId(asignaturaId);
-        matricula.setFechaRegistro("2024/04/04"); // Formato yyyy/MM/dd
+        matricula.setFechaRegistro("2024/04/04");
 
         return matriculaRepository.save(matricula);
     }

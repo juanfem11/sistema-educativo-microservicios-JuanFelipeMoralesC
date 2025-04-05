@@ -12,36 +12,80 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: secret
     volumes:
       - mongodb_data:/data/db
+    networks:
+      - educativo-network
+
+  config-server:
+    build: ./config-server/configserver
+    container_name: config-server
+    ports:
+      - "8888:8888"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    networks:
+      - educativo-network
+    depends_on:
+      - mongodb
+
+  eureka-server:
+    build:
+      context: ./eureka-server/eureka-server
+      dockerfile: Dockerfile
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - educativo-network
+    depends_on:
+      - config-server
 
   usuarios-servicio:
     build: ./usuarios-servicio/usuarios-servicio
+    container_name: usuarios-servicio
     ports:
       - "8081:8081"
     environment:
       - SPRING_PROFILES_ACTIVE=dev
     depends_on:
-      - asignaturas-servicio
-      - mongodb  
+      - eureka-server
+      - config-server
+      - mongodb
+    networks:
+      - educativo-network
 
   asignaturas-servicio:
     build: ./asignaturas-servicio/asignaturas-servicio
+    container_name: asignaturas-servicio
     ports:
       - "8082:8082"
     environment:
       - SPRING_PROFILES_ACTIVE=dev
     depends_on:
-      - mongodb  
+      - eureka-server
+      - config-server
+      - mongodb
+    networks:
+      - educativo-network
 
   matriculas-servicio:
     build: ./matriculas-servicio/matriculas-servicio
+    container_name: matriculas-servicio
     ports:
       - "8083:8083"
     environment:
       - SPRING_PROFILES_ACTIVE=dev
     depends_on:
+      - eureka-server
+      - config-server
       - usuarios-servicio
       - asignaturas-servicio
-      - mongodb  
+      - mongodb
+    networks:
+      - educativo-network
 
 volumes:
   mongodb_data:
+
+networks:
+  educativo-network:
+    driver: bridge

@@ -1,19 +1,24 @@
 package com.educativo.usuarios_servicio.model;
 
 public class Usuario {
-    private int id;
+    private String id;
     private String nombre;
+    private String email;
+    private String password;
 
-    public Usuario(int id, String nombre) {
+    public Usuario(String id, String nombre, String email, String password) {
         this.id = id;
         this.nombre = nombre;
+        this.email = email;
+        this.password = password;
     }
 
-    public int getId() {
+    // Getters y Setters
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -23,5 +28,21 @@ public class Usuario {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
