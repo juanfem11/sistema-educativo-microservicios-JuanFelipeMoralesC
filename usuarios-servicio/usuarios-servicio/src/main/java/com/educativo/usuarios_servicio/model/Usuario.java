@@ -13,7 +13,6 @@ public class Usuario {
         this.password = password;
     }
 
-    // Getters y Setters
     public String getId() {
         return id;
     }

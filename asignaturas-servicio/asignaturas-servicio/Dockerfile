@@ -1,10 +1,10 @@
-# Usa una imagen oficial de Java 17
+# Usa una imagen de Java 17
 FROM openjdk:17-jdk-slim
 
 # Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copia SOLO el archivo JAR principal (usa el nombre exacto)
+# Copia SOLO el archivo JAR principal
 COPY target/*.jar app.jar
 
 # Expone el puerto

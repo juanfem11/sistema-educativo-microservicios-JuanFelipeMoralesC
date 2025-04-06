@@ -12,19 +12,16 @@ import java.util.Optional;
 @RequestMapping("/asignaturas")
 public class AsignaturaController {
 
-    // Lista simulada de asignaturas
     private final List<Asignatura> asignaturas = Arrays.asList(
             new Asignatura(1, "Matemáticas", 4),
             new Asignatura(2, "Física", 3),
             new Asignatura(3, "Química", 4));
 
-    // Obtener todas las asignaturas (ya existe)
     @GetMapping
     public List<Asignatura> obtenerAsignaturas() {
         return asignaturas;
     }
 
-    // Nuevo endpoint para obtener una asignatura por ID
     @GetMapping("/{id}")
     public ResponseEntity<Asignatura> obtenerAsignaturaPorId(@PathVariable int id) {
         Optional<Asignatura> asignatura = asignaturas.stream()
