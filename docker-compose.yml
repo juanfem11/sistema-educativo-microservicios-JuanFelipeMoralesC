@@ -82,6 +82,19 @@ services:
       - mongodb
     networks:
       - educativo-network
+      
+  admin-server:
+    build: ./admin-server/admin-server
+    container_name: admin-server
+    ports:
+      - "9090:9090"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - eureka-server
+      - config-server
+    networks:
+      - educativo-network
 
 volumes:
   mongodb_data:

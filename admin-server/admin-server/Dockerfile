@@ -5,10 +5,10 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copia SOLO el archivo JAR principal (usa el nombre exacto)
-COPY target/*.jar app.jar
+COPY target/admin-server-*.jar /app.jar
 
 # Expone el puerto
-EXPOSE 8082
+EXPOSE 9090
 
 # Comando para ejecutar la aplicación
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "/app.jar"]
