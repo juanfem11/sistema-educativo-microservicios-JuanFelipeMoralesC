@@ -26,7 +26,8 @@ public class SecurityConfig {
                                 "/auth/**",
                                 "/actuator/**",
                                 "/instances",
-                                "/applications/**")
+                                "/applications/**",
+                                "/usuarios/**")
                         .permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

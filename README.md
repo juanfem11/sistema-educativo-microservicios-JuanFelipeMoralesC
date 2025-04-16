@@ -140,3 +140,8 @@ No se encuentra mongoTemplate: Asegurasre de que MongoDB esté levantado o corre
 Fallo de autenticación: Verificar que el JWT se esté enviando correctamente en el header y que no haya expirado.
 
 Microservicios no aparecen en Eureka o Admin: Se debe confirmar que eureka.client.enabled=true y management.endpoints.web.exposure.include=* estén correctamente configurados.
+
+
+
+
+Texto de prueba Pipeline Github Action

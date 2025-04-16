@@ -18,10 +18,10 @@ public class UsuarioController {
             new Usuario("2", "Maria Antonia Zapata", "maria@email.com", "password456"),
             new Usuario("3", "Carlos Andrés Alzate", "carlos@email.com", "password789"));
 
-    @GetMapping("/{email}")
-    public Optional<Usuario> obtenerUsuarioPorEmail(@PathVariable String email) {
+    @GetMapping("/{id}")
+    public Optional<Usuario> obtenerUsuarioPorId(@PathVariable String id) {
         return usuarios.stream()
-                .filter(usuario -> usuario.getEmail().equals(email))
+                .filter(usuario -> usuario.getId().equals(id)) // Compara por ID
                 .findFirst();
     }
 }
